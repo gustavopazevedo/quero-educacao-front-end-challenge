@@ -4,7 +4,9 @@
 	"description": "Quero Educação Front-end code challenge",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"dev": "cross-env NODE_ENV=development APP_ENV=development next",
+		"build": "next build",
+		"start": "cross-env NODE_ENV=production APP_ENV=production next start"
 	},
 	"repository": {
 		"type": "git",
@@ -18,8 +20,10 @@
 	},
 	"homepage": "https://github.com/gustavopazevedo/quero-educacao-front-end-challenge#readme",
 	"dependencies": {
+		"cross-env": "^5.2.0",
 		"next": "^9.0.0",
 		"react": "^16.8.6",
-		"react-dom": "^16.8.6"
+		"react-dom": "^16.8.6",
+		"uuid": "^3.3.2"
 	}
 }
