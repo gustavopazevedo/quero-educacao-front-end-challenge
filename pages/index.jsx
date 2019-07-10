@@ -1,6 +1,12 @@
+/** LAYOUT */
+import DefaultLayout from '@layouts/Default';
+/** END LAYOUT */
+
 function Home() {
 	return (
-		<div>{process.env.SITE_NAME}</div>
+		<DefaultLayout>
+			<div>{process.env.SITE_NAME}</div>
+		</DefaultLayout>
 	)
 }
 

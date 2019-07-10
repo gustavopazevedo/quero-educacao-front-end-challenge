@@ -20,10 +20,15 @@
 	},
 	"homepage": "https://github.com/gustavopazevedo/quero-educacao-front-end-challenge#readme",
 	"dependencies": {
+		"@emotion/core": "^10.0.14",
+		"@emotion/styled": "^10.0.14",
 		"cross-env": "^5.2.0",
 		"next": "^9.0.0",
 		"react": "^16.8.6",
 		"react-dom": "^16.8.6",
 		"uuid": "^3.3.2"
+	},
+	"devDependencies": {
+		"babel-plugin-emotion": "^10.0.14"
 	}
 }
