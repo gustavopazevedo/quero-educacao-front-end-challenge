@@ -11,6 +11,10 @@ import Container from '@components/Container';
 /** STYLED */
 const StyledHeader = styled.header`
 	width: 100%;
+	height: 60px;
+	display: flex;
+	align-items: center;
+	background-color: #fff;
 `;
 
 const StyledBrand = styled.h1`

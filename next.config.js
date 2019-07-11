@@ -1,11 +1,12 @@
 const path = require('path');
+const withImages = require('next-images');
 
 /** CONFIG */
 const app_env = process.env.APP_ENV || 'development';
 const config = require(`./configs/${app_env}.config.js`);
 /** END CONFIG */
 
-module.exports = {
+module.exports = withImages({
 	target: 'serverless',
 	env: config,
 
@@ -16,6 +17,7 @@ module.exports = {
 			{ alias: '@components', path: 'components' },
 			{ alias: '@layouts', path: 'layouts' },
 			{ alias: '@reducers', path: 'reducers' },
+			{ alias: '@static', path: 'static' },
 			{ alias: '@store', path: 'store' }
 
 		]
@@ -27,4 +29,4 @@ module.exports = {
 		return webpackConfig;
 	}
 	/** END CUSTOM WEBPACK CONFIG */
-}
+});

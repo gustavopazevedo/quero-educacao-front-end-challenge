@@ -24,11 +24,20 @@ const StyledFooterBottom = styled.div`
 	p {
 		width: 100%;
 		color: #fff;
-		display: block;
+		display: flex;
 		font-weight: 700;
 		font-size: 1.3rem;
-		text-align: center;
+		justify-content: center;
 	}
+`;
+
+const StyledMadeWitLove = styled.span`
+	width: 16px;
+	height: 16px;
+	background: url('static/images/icons/icon-heart.svg') no-repeat scroll center center;
+	background-size: 16px auto;
+	display: block;
+	margin: 0 5px;
 `;
 /** END STYLED */
 
@@ -42,7 +51,7 @@ function Footer() {
 			</StyledFooterTop>
 			<StyledFooterBottom>
 				<Container>
-					<p>Feito com pela Quero Educação</p>
+					<p>Feito com <StyledMadeWitLove /> pela Quero Educação</p>
 				</Container>
 			</StyledFooterBottom>
 		</StyledFooter>

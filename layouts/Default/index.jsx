@@ -12,11 +12,11 @@ const GlobalStyles = css`
 	:root {
 		--default-font-family: proxima-nova, sans-serif;
 		--color-main-blue: #18ACC4;
-		--color-secondary-blue:  #007A8D;
+		--color-secondary-blue: #007A8D;
 		--color-main-yellow: #FDCB13;
-		--color-secondary-yellow:  #DE9E1F;
+		--color-secondary-yellow: #DE9E1F;
 		--color-green: #0FA866;
-		--color-grey: #0FA866;
+		--color-grey: #FBFBFB;
 		--color-black: #1F2D30;
 	}
 
@@ -48,6 +48,7 @@ const GlobalStyles = css`
 const StyledSite = styled.div`
 	width: 100%;
 	min-height: 100vh;
+	background-color: var(--color-grey);
 `;
 
 const StyledMain = styled.main`
