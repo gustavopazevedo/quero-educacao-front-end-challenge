@@ -1,7 +1,9 @@
 import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 
 /** COMPONENTS */
 import Container from '@components/Container';
+import Contact from '@components/Contact';
 /** END COMPONENTS */
 
 /** STYLED */
@@ -13,6 +15,10 @@ const StyledFooter = styled.footer`
 const StyledFooterTop = styled.div`
 	width: 100%;
 	background-color: var(--color-secondary-blue);
+`;
+
+const StyledContainerFooterTop = css`
+	width: 100%;
 `;
 
 const StyledFooterBottom = styled.div`
@@ -45,8 +51,8 @@ function Footer() {
 	return (
 		<StyledFooter>
 			<StyledFooterTop>
-				<Container>
-					Footer
+				<Container customCss={StyledContainerFooterTop}>
+					<Contact />
 				</Container>
 			</StyledFooterTop>
 			<StyledFooterBottom>

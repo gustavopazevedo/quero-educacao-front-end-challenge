@@ -4,12 +4,14 @@ import styled from '@emotion/styled';
 const StyledContainer = styled.div`
 	width: calc(100% - 32px);
 	margin: 0 auto;
+
+	${props => props.customCss}
 `;
 /** END STYLED */
 
-function Container({ children }) {
+function Container({ children, customCss }) {
 	return (
-		<StyledContainer>{children}</StyledContainer>
+		<StyledContainer customCss={customCss}>{children}</StyledContainer>
 	)
 }
 

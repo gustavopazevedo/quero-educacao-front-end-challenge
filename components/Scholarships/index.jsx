@@ -1,7 +1,5 @@
 import styled from '@emotion/styled';
 
-import IconPlusCircle from '@static/images/icons/icon-plus-circle.svg';
-
 /** STYLED */
 const StyledScholarships = styled.div`
 	width: 100%;

@@ -24,7 +24,6 @@
 		"@emotion/styled": "^10.0.14",
 		"cross-env": "^5.2.0",
 		"next": "^9.0.0",
-		"next-images": "^1.1.2",
 		"react": "^16.8.6",
 		"react-dom": "^16.8.6",
 		"uuid": "^3.3.2"

@@ -1,12 +1,11 @@
 const path = require('path');
-const withImages = require('next-images');
 
 /** CONFIG */
 const app_env = process.env.APP_ENV || 'development';
 const config = require(`./configs/${app_env}.config.js`);
 /** END CONFIG */
 
-module.exports = withImages({
+module.exports = {
 	target: 'serverless',
 	env: config,
 
@@ -29,4 +28,4 @@ module.exports = withImages({
 		return webpackConfig;
 	}
 	/** END CUSTOM WEBPACK CONFIG */
-});
+}
