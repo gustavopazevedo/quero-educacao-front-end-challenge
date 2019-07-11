@@ -15,10 +15,18 @@ const StyledFooter = styled.footer`
 const StyledFooterTop = styled.div`
 	width: 100%;
 	background-color: var(--color-secondary-blue);
+	
+	@media screen and (min-width: 1140px) {
+		display: flex;
+		height: 127px;
+		align-items: center;
+	}
 `;
 
 const StyledContainerFooterTop = css`
-	width: 100%;
+	@media screen and (max-width: 1140px) {
+		width: 100%;
+	}
 `;
 
 const StyledFooterBottom = styled.div`
@@ -26,6 +34,10 @@ const StyledFooterBottom = styled.div`
 	height: 84px;
 	display:  flex;
 	align-items: center;
+
+	@media screen and (min-width: 1140px) {
+		height: 120px;
+	}
 
 	p {
 		width: 100%;
