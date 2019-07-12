@@ -65,7 +65,7 @@ const StyledMenuButton = styled.button`
 		background-size: 10px auto;
 		transition: all 0.5s ease;
 
-		${props => props.opened && css`
+		${props => props.isOpened && css`
 			transform: rotate(180deg);
 			background-position-x: left;
 			transition: all 0.5s ease;
@@ -84,7 +84,7 @@ const StyledMenuNav = styled.nav`
 	right: 0;
 	background-color: var(--color-main-blue);
 
-	${props => !props.opened && css`
+	${props => !props.isOpened && css`
 		display: none;
 	`}
 
@@ -118,7 +118,7 @@ const StyledMenuNavItem = styled.li`
 /** END STYLED */
 
 function Menu() {
-	const [opened, setOpened] = useState(false)
+	const [isOpened, setIsOpened] = useState(false)
 
 	return (
 		<StyledMenu>
@@ -126,8 +126,8 @@ function Menu() {
 				<Link href={process.env.HOME_URL}>
 					<StyledMyAccountLink>Minha conta</StyledMyAccountLink>
 				</Link>
-				<StyledMenuButton opened={opened} onClick={() => setOpened(!opened)}>Menu</StyledMenuButton>
-				<StyledMenuNav opened={opened}>
+				<StyledMenuButton isOpened={isOpened} onClick={() => setIsOpened(!isOpened)}>Menu</StyledMenuButton>
+				<StyledMenuNav isOpened={isOpened}>
 					<StyledMenuNavItem>
 						<Link href={process.env.HOME_URL}>
 							<a>Pré-matrículas</a>

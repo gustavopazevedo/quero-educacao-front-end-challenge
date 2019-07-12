@@ -14,6 +14,7 @@ module.exports = {
 		const aliases = [
 			{ alias: '@actions', path: 'actions' },
 			{ alias: '@components', path: 'components' },
+			{ alias: '@hocs', path: 'hocs' },
 			{ alias: '@layouts', path: 'layouts' },
 			{ alias: '@reducers', path: 'reducers' },
 			{ alias: '@static', path: 'static' },

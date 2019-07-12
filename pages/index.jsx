@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { connect } from 'react-redux';
+import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 
 /** ACTIONS */
@@ -13,6 +15,7 @@ import DefaultLayout from '@layouts/Default';
 import Container from '@components/Container';
 import SemesterFilter from '@components/SemesterFilter';
 import Scholarships from '@components/Scholarships';
+import ModalScholarships from '@components/Modals/ModalScholarships';
 /** END COMPONENTS */
 
 /** STYLED */
@@ -27,9 +30,16 @@ const StyledParagraph = styled.p`
 	font-size: 1.6rem;
 	line-height: 150%;
 `;
+
+const CssModalScholarships = css`
+	width: 100%;
+	position: absolute;
+`;
 /** END STYLED */
 
-function Home({ getScholarships, scholarships }) {
+function Home({ getScholarships }) {
+	const [isModalOpened, setIsModalOpened] = useState(false);
+
 	return (
 		<DefaultLayout>
 			<Container>
@@ -40,9 +50,12 @@ function Home({ getScholarships, scholarships }) {
 					{ text: '2º semestre de 2019', enrollment_semester: 2019.2 },
 					{ text: '1º semestre de 2020', enrollment_semester: 2020.1 }
 				]} />
-				<Scholarships items={[]} onAdd={() => getScholarships()} />
-				{scholarships && JSON.stringify(scholarships.data)}
+				<Scholarships items={[]} onAdd={() => {
+					setIsModalOpened(true)
+					getScholarships();
+				}} />
 			</Container>
+			<ModalScholarships customCss={CssModalScholarships} isOpened={isModalOpened} position={'absolute'} />
 		</DefaultLayout>
 	)
 }
