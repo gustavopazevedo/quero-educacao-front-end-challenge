@@ -63,6 +63,13 @@ const StyledMenuButton = styled.button`
 		right: 0;
 		background: url('/static/images/icons/icon-down-arrow.svg') no-repeat scroll center right;
 		background-size: 10px auto;
+		transition: all 0.5s ease;
+
+		${props => props.opened && css`
+			transform: rotate(180deg);
+			background-position-x: left;
+			transition: all 0.5s ease;
+		`}
 
 		@media screen and (min-width: 1140px) {
 			display: none;
@@ -119,7 +126,7 @@ function Menu() {
 				<Link href={process.env.HOME_URL}>
 					<StyledMyAccountLink>Minha conta</StyledMyAccountLink>
 				</Link>
-				<StyledMenuButton onClick={() => setOpened(!opened)}>Menu</StyledMenuButton>
+				<StyledMenuButton opened={opened} onClick={() => setOpened(!opened)}>Menu</StyledMenuButton>
 				<StyledMenuNav opened={opened}>
 					<StyledMenuNavItem>
 						<Link href={process.env.HOME_URL}>

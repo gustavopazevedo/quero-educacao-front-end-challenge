@@ -23,6 +23,7 @@ const StyledSemesterFilterItem = styled.li`
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
+	user-select: none;
 
 	${props => props.selected && css`
 		background-color: var(--color-secondary-blue);

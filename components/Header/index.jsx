@@ -7,6 +7,7 @@ import Link from 'next/link';
 
 /** COMPONENTS */
 import Container from '@components/Container';
+import IconedLink from '@components/IconedLink';
 /** END COMPONENTS */
 
 /** STYLED */
@@ -22,6 +23,9 @@ const StyledHeader = styled.header`
 `;
 
 const CssHeaderContainer = css`
+	display: flex;
+	flex-wrap: wrap;
+
 	@media screen and (max-width: 1140px) {
 		width: 100%;
 	}
@@ -48,6 +52,7 @@ function Header() {
 	return (
 		<StyledHeader>
 			<Container customCss={CssHeaderContainer}>
+				<IconedLink border={'right'} icon={'info-circle'} link={'/'} text={'Ajuda'} />
 				<StyledBrand>
 					<Link href={process.env.HOME_URL}>
 						<a>
@@ -55,6 +60,7 @@ function Header() {
 						</a>
 					</Link>
 				</StyledBrand>
+				<IconedLink border={'left'} icon={'user-circle'} link={'/'} text={'Conta'} />
 			</Container>
 		</StyledHeader>
 	)
