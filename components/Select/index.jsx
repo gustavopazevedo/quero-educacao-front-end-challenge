@@ -20,14 +20,16 @@ const StyledSelect = styled.div`
 	width: 100%;
 	height: 48px;
 	position: relative;
+	border: 1px solid #cacccd;
+	border-radius: 5px;
 
 	&:after {
 		width: 34px;
-		height: 46px;
+		height: 44px;
 		content: "";
 		display: block;
 		position: absolute;
-		top: 1px;
+		top: 2px;
 		right: 1px;
 		background: #fff url('/static/images/icons/icon-down-arrow-gray.svg') no-repeat scroll center left 12px;
 		background-size: 10px auto;
@@ -37,12 +39,13 @@ const StyledSelect = styled.div`
 
 	select {
 		width: 100%;
-		height: 48px;
-		border: 1px solid #cacccd;
+		height: 100%;
 		outline: none;
-		border-radius: 5px;
 		padding: 0 34px 0 11px;
 		font-size: 1.6rem;
+		background-color: #fff;
+		border: none;
+		border-radius: 5px;
 	}
 `;
 /** END STYLED */
