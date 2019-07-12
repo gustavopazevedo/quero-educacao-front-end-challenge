@@ -4,6 +4,8 @@ import styled from '@emotion/styled';
 
 /** COMPONENTS */
 import Header from '@components/Header';
+import Menu from '@components/Menu';
+import Breadcrumbs from '@components/Breadcrumbs';
 import Footer from '@components/Footer';
 /** END COMPONENTS */
 
@@ -63,6 +65,8 @@ function DefaultLayout({ children }) {
 			<Global styles={GlobalStyles} />
 			<StyledSite>
 				<Header />
+				<Menu />
+				<Breadcrumbs />
 				<StyledMain>{children}</StyledMain>
 				<Footer />
 			</StyledSite>

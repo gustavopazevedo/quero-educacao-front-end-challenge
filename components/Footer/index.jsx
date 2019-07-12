@@ -23,7 +23,7 @@ const StyledFooterTop = styled.div`
 	}
 `;
 
-const StyledContainerFooterTop = css`
+const CssFooterTopContainer = css`
 	@media screen and (max-width: 1140px) {
 		width: 100%;
 	}
@@ -63,7 +63,7 @@ function Footer() {
 	return (
 		<StyledFooter>
 			<StyledFooterTop>
-				<Container customCss={StyledContainerFooterTop}>
+				<Container customCss={CssFooterTopContainer}>
 					<Contact />
 				</Container>
 			</StyledFooterTop>

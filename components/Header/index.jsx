@@ -1,3 +1,4 @@
+import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 
 /** NEXT.JS */
@@ -14,7 +15,16 @@ const StyledHeader = styled.header`
 	height: 60px;
 	display: flex;
 	align-items: center;
+	position: relative;
 	background-color: #fff;
+	box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
+	z-index: 99;
+`;
+
+const CssHeaderContainer = css`
+	@media screen and (max-width: 1140px) {
+		width: 100%;
+	}
 `;
 
 const StyledBrand = styled.h1`
@@ -37,7 +47,7 @@ const StyledBrand = styled.h1`
 function Header() {
 	return (
 		<StyledHeader>
-			<Container>
+			<Container customCss={CssHeaderContainer}>
 				<StyledBrand>
 					<Link href={process.env.HOME_URL}>
 						<a>

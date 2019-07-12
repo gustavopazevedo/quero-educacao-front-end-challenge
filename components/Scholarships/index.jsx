@@ -12,9 +12,12 @@ const StyledAddScholarship = styled.div`
 	height: 199px;
 	background-color: #fff;
 	box-shadow: 0px 2px 5px 0px rgba(210, 210, 210, 1);
-	padding: 116px 30px 30px 30px;
 	cursor: pointer;
 	position: relative;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	flex-wrap: wrap;
 
 	img {
 		background-color: #f00;
@@ -39,12 +42,11 @@ const StyledAddScholarship = styled.div`
 const StyledAddScholarshipIcon = styled.span`
 	width: 64px;
 	height: 64px;
-	position: absolute;
+	position: relative;
 	background: url('static/images/icons/icon-plus-circle.svg') no-repeat scroll center center;
 	background-size: 64px auto;
-	top: 24px;
-	left: 50%;
-	transform: translateX(-50%);
+	display: block;
+	margin-bottom: 19px;
 `; 
 /** END STYLED */
 

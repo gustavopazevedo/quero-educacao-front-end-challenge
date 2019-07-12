@@ -32,11 +32,6 @@ const StyledSemesterFilterItem = styled.li`
 	&:last-of-type {
 		border-bottom: none;
 	}
-
-	&:hover {
-		background-color: var(--color-secondary-blue);
-		color: #fff;
-	}
 `;
 /** END STYLED */
 

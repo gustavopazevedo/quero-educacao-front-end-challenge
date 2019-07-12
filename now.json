@@ -1,0 +1,10 @@
+{
+	"version": 2,
+	"name": "quero-educacao-front-end-challenge",
+	"builds": [
+		{
+			"src": "next.config.js",
+			"use": "@now/next"
+		}
+	]
+}
