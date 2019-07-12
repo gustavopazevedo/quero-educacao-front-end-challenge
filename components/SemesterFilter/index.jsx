@@ -1,5 +1,6 @@
-import styled from '@emotion/styled';
+import { useState } from 'react';
 import { css } from '@emotion/core';
+import styled from '@emotion/styled';
 import uuidv4 from 'uuid/v4';
 
 /** STYLED */
@@ -36,12 +37,20 @@ const StyledSemesterFilterItem = styled.li`
 `;
 /** END STYLED */
 
-function SemesterFilter() {
+function SemesterFilter({ items }) {
+	const [semester, setSemester] = useState(0)
+
 	return (
 		<StyledSemesterFilter>
-			<StyledSemesterFilterItem key={uuidv4()} selected>Todos os semestres</StyledSemesterFilterItem>
-			<StyledSemesterFilterItem key={uuidv4()}>2º semestre de 2019</StyledSemesterFilterItem>
-			<StyledSemesterFilterItem key={uuidv4()}>1º semestre de 2020</StyledSemesterFilterItem>
+			{items && items.map(item => (
+				<StyledSemesterFilterItem
+					key={uuidv4()}
+					selected={semester === item.enrollment_semester}
+					onClick={() => setSemester(item.enrollment_semester)}
+				>
+					{item.text}
+				</StyledSemesterFilterItem>
+			))}
 		</StyledSemesterFilter>
 	)
 }

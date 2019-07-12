@@ -18,6 +18,7 @@ const StyledIconedLink = styled.a`
 	font-size: 1.3rem;
 	color: var(--color-secondary-blue);
 	padding: 28px 0 1px 0;
+	user-select: none;
 
 	${props => props.border && css`
 		border-${props.border}: 2px solid #eeefef;

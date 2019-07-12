@@ -30,7 +30,11 @@ function Home() {
 			<Container>
 				<StyledTitle>Bolsas favoritas</StyledTitle>
 				<StyledParagraph>Adicione bolsas de cursos e faculdades do seu interesse e receba atualizações com as melhores ofertas disponíveis.</StyledParagraph>
-				<SemesterFilter />
+				<SemesterFilter items={[
+					{ text: 'Todos os semestres', enrollment_semester: 0},
+					{ text: '2º semestre de 2019', enrollment_semester: 2019.2 },
+					{ text: '1º semestre de 2020', enrollment_semester: 2020.1 }
+				]} />
 				<Scholarships />
 			</Container>
 		</DefaultLayout>
