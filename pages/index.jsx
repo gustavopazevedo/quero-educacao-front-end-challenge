@@ -55,7 +55,7 @@ function Home({ getScholarships }) {
 					getScholarships();
 				}} />
 			</Container>
-			<ModalScholarships customCss={CssModalScholarships} isOpened={isModalOpened} position={'absolute'} />
+			<ModalScholarships customCss={CssModalScholarships} isOpened={isModalOpened} onClose={() => setIsModalOpened(false)} />
 		</DefaultLayout>
 	)
 }

@@ -88,6 +88,8 @@ function withModal(WrappedComponent) {
 			if (props.isOpened !== isOpened) {
 				if (props.isOpened && !isRendered) {
 					setIsRendered(true)
+				} else {
+					setIsOpened(false)
 				}
 			}
 		}, [props.isOpened])
@@ -95,8 +97,6 @@ function withModal(WrappedComponent) {
 		useEffect(() => {
 			if (props.isOpened) {
 				setIsOpened(true)
-			} else {
-				setIsOpened(false)
 			}
 		}, [isRendered])
 
@@ -109,7 +109,7 @@ function withModal(WrappedComponent) {
 						pose={isOpened ? 'opened' : 'closed'}
 						onPoseComplete={(state) => state === 'closed' ? setIsRendered(false) : null}
 					>
-						<StyledCloseButton onClick={() => setIsOpened(false)} />
+						<StyledCloseButton onClick={() => props.onClose()} />
 						<WrappedComponent {...props} />
 					</StyledWithModalComponent>
 				</StyledWithModal>
