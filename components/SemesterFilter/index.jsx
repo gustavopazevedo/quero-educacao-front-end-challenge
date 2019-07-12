@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import { useState } from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
@@ -37,16 +38,39 @@ const StyledSemesterFilterItem = styled.li`
 `;
 /** END STYLED */
 
-function SemesterFilter({ items }) {
-	const [semester, setSemester] = useState(0)
+function SemesterFilter({ scholarships }) {
+	const [selectedSemester, setSelectecSemester] = useState(0)
+
+	function getSemesters() {
+		if (scholarships.isFulfilled) {
+			const semestersArr = [...new Set(scholarships.data.map(item => item.enrollment_semester))]
+
+			const semesters = semestersArr.map(item => {
+				const splitted = item.split('.');
+				const semester = splitted[1];
+				const year = splitted[0];
+	
+				return {
+					text: `${semester}º semestre de ${year}`,
+					enrollment_semester: item
+				}
+			})
+	
+			return [
+				{ text: 'Todos os semestres', enrollment_semester: 0 },
+				...semesters
+			]
+		}
+
+	}
 
 	return (
 		<StyledSemesterFilter>
-			{items && items.map(item => (
+			{getSemesters().map(item => (
 				<StyledSemesterFilterItem
 					key={uuidv4()}
-					selected={semester === item.enrollment_semester}
-					onClick={() => setSemester(item.enrollment_semester)}
+					selected={selectedSemester === item.enrollment_semester}
+					onClick={() => setSelectecSemester(item.enrollment_semester)}
 				>
 					{item.text}
 				</StyledSemesterFilterItem>
@@ -55,4 +79,8 @@ function SemesterFilter({ items }) {
 	)
 }
 
-export default SemesterFilter;
+export default connect(
+	store => ({
+		scholarships: store.scholarships
+	})
+)(SemesterFilter);

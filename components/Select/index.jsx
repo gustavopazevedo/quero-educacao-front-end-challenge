@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import uuidv4 from 'uuid/v4';
 
 /** STYLED */
 const StyledSelectWrapper = styled.div`
@@ -56,7 +57,7 @@ function Select({ customCss, label, onChange, options, value }) {
 			<StyledSelectLabel>{label}</StyledSelectLabel>
 			<StyledSelect>
 				<select onChange={(e) => onChange(e.target.value)} value={value}>
-					{options.map(option => <option value={option.value}>{option.text}</option>)}
+					{options && options.map(option => <option key={uuidv4()} value={option.value}>{option.text}</option>)}
 				</select>
 			</StyledSelect>
 		</StyledSelectWrapper>
