@@ -55,13 +55,13 @@ const StyledMenuButton = styled.button`
 	margin-right: 16px;
 
 	&:before {
-		width: 19px;
+		width: 10px;
 		height: 100%;
 		position: absolute;
 		content: "";
 		top: 0;
 		right: 0;
-		background: url('/static/images/icons/icon-down-arrow.svg') no-repeat scroll center right;
+		background: url('/static/images/icons/icon-down-arrow.svg') no-repeat scroll center center;
 		background-size: 10px auto;
 		transition: all 0.5s ease;
 
