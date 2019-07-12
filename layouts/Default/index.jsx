@@ -18,7 +18,7 @@ const GlobalStyles = css`
 		--color-main-yellow: #FDCB13;
 		--color-secondary-yellow: #DE9E1F;
 		--color-green: #0FA866;
-		--color-grey: #FBFBFB;
+		--color-gray: #FBFBFB;
 		--color-black: #1F2D30;
 	}
 
@@ -50,7 +50,7 @@ const GlobalStyles = css`
 const StyledSite = styled.div`
 	width: 100%;
 	min-height: 100vh;
-	background-color: var(--color-grey);
+	background-color: var(--color-gray);
 `;
 
 const StyledMain = styled.main`
