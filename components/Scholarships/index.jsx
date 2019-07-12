@@ -1,9 +1,14 @@
 import styled from '@emotion/styled';
 
+/** COMPONENTS */
+import SingleScholarship from '@components/SingleScholarship';
+/** END COMPONENTS */
+
 /** STYLED */
 const StyledScholarships = styled.div`
 	width: 100%;
 	display: flex;
+	flex-wrap: wrap;
 	margin-top: 32px;
 `;
 
@@ -29,6 +34,7 @@ const StyledAddScholarship = styled.div`
 		text-align: center;
 		line-height: 100%;
 		margin-bottom: 3px;
+		user-select: none;
 	}
 
 	p {
@@ -36,6 +42,7 @@ const StyledAddScholarship = styled.div`
 		line-height: 150%;
 		font-size: 1.3rem;
 		text-align: center;
+		user-select: none;
 	}
 `;
 
@@ -47,17 +54,28 @@ const StyledAddScholarshipIcon = styled.span`
 	background-size: 64px auto;
 	display: block;
 	margin-bottom: 19px;
-`; 
+`;
+
+const StyledSelectedScholarships = styled.div`
+	width: 100%;
+	margin-top: 24px;
+`;
 /** END STYLED */
 
-function Scholarships({ items }) {
+function Scholarships({ items, onAdd }) {
 	return (
 		<StyledScholarships>
-			<StyledAddScholarship>
+			<StyledAddScholarship onClick={() => onAdd()}>
 				<StyledAddScholarshipIcon />
 				<h3>Adicionar bolsa</h3>
 				<p>Clique para adicionar bolsas <br />de cursos do seu interesse</p>
 			</StyledAddScholarship>
+			{items ? (
+				<StyledSelectedScholarships>
+					<SingleScholarship />
+				</StyledSelectedScholarships>
+			) : null }
+
 		</StyledScholarships>
 	)
 }

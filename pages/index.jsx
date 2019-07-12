@@ -1,4 +1,9 @@
+import { connect } from 'react-redux';
 import styled from '@emotion/styled';
+
+/** ACTIONS */
+import actions from '@actions';
+/** END ACTIONS */
 
 /** LAYOUT */
 import DefaultLayout from '@layouts/Default';
@@ -24,7 +29,7 @@ const StyledParagraph = styled.p`
 `;
 /** END STYLED */
 
-function Home() {
+function Home({ getScholarships, scholarships }) {
 	return (
 		<DefaultLayout>
 			<Container>
@@ -35,10 +40,16 @@ function Home() {
 					{ text: '2º semestre de 2019', enrollment_semester: 2019.2 },
 					{ text: '1º semestre de 2020', enrollment_semester: 2020.1 }
 				]} />
-				<Scholarships />
+				<Scholarships items={[]} onAdd={() => getScholarships()} />
+				{scholarships && JSON.stringify(scholarships.data)}
 			</Container>
 		</DefaultLayout>
 	)
 }
 
-export default Home;
+export default connect(
+	store => ({
+		scholarships: store.scholarships
+	}),
+	actions
+)(Home);

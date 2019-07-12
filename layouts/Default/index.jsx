@@ -56,6 +56,7 @@ const StyledSite = styled.div`
 const StyledMain = styled.main`
 	width: 100%;
 	min-height: 600px;
+	padding-bottom: 20px;
 `;
 /** END STYLED */
 
