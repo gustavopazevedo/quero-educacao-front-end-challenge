@@ -15,6 +15,12 @@ function ScholarshipsResults({ filters, scholarships }) {
 				_results = _results.filter(item => item.course.name === filters.course)
 			}
 
+			if (filters.kindOfCourse && filters.kindOfCourse.length) {
+				_results = _results.filter(item => filters.kindOfCourse.includes(item.course.kind));
+			}
+
+			_results = _results.filter(item => item.price_with_discount <= filters.maxPrice);
+
 			setResults(_results)
 		}
 	}, [filters, scholarships])

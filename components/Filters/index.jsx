@@ -17,7 +17,7 @@ const StyledFilters = styled.div`
 	margin-top: 31px;
 `;
 
-const StyledFiltersKindsOfCourse = styled.div`
+const StyledFiltersKindOfCourse = styled.div`
 	width: 100%;
 	margin-bottom: 31px;
 `;
@@ -28,8 +28,8 @@ function Filters({ onChange, scholarships }) {
 	const [selectedCourse, setSelectedCourse] = useState('');
 	const [cities, setCities] = useState(0);
 	const [courses, setCourses] = useState(0);
-	const [kindsOfCourse, setKindsOfCourse] = useState();
-	const [checkedKindsOfCourse, setCheckedKindsOfCourse] = useState([]);
+	const [kindOfCourse, setKindOfCourse] = useState();
+	const [checkedKindOfCourse, setCheckedKindOfCourse] = useState([]);
 	const [selectedMaxPrice, setSelectedMaxPrice] = useState(10000);
 
 	useEffect(() => {
@@ -47,11 +47,11 @@ function Filters({ onChange, scholarships }) {
 			setCourses(coursesArr.map(item => ({ text: item, value: item })));
 
 			/** KINDS OF COURSE */
-			const kindsOfCourseArr = [...new Set(scholarships.data.map(item => item.course.kind))];
-			kindsOfCourseArr.sort();
+			const kindOfCourseArr = [...new Set(scholarships.data.map(item => item.course.kind))];
+			kindOfCourseArr.sort();
 
-			setKindsOfCourse(kindsOfCourseArr.map(item => ({ text: item, value: item })))
-			setCheckedKindsOfCourse(kindsOfCourseArr)
+			setKindOfCourse(kindOfCourseArr.map(item => ({ text: item, value: item })))
+			setCheckedKindOfCourse(kindOfCourseArr)
 		}
 	}, [scholarships])
 
@@ -59,16 +59,16 @@ function Filters({ onChange, scholarships }) {
 		onChange({
 			city: selectedCity,
 			course: selectedCourse,
-			kindsOfCourse: checkedKindsOfCourse,
+			kindOfCourse: checkedKindOfCourse,
 			maxPrice: selectedMaxPrice
 		})
-	}, [selectedCity, selectedCourse, checkedKindsOfCourse, selectedMaxPrice])
+	}, [selectedCity, selectedCourse, checkedKindOfCourse, selectedMaxPrice])
 
-	function onChangeCheckedkKindsOfCourse(e, item) {
+	function onChangeCheckedkKindOfCourse(e, item) {
 		if (e.target.checked) {
-			setCheckedKindsOfCourse(c => [...c, item.value])
+			setCheckedKindOfCourse(c => [...c, item.value])
 		} else {
-			setCheckedKindsOfCourse(c => c.filter(filtered => filtered !== item.value))
+			setCheckedKindOfCourse(c => c.filter(filtered => filtered !== item.value))
 		}
 	}
 
@@ -90,18 +90,18 @@ function Filters({ onChange, scholarships }) {
 				value={selectedCourse}
 				defaultOption={{ text: '', value: '' }}
 			/>
-			<StyledFiltersKindsOfCourse>
+			<StyledFiltersKindOfCourse>
 				<Label customCss={css` margin-bottom: 31px;`}>Como você quer estudar?</Label>
-				{kindsOfCourse && kindsOfCourse.map(item => (
+				{kindOfCourse && kindOfCourse.map(item => (
 					<Checkbox
 						key={uuidv4()}
-						checked={checkedKindsOfCourse.includes(item.value)}
+						checked={checkedKindOfCourse.includes(item.value)}
 						label={item.text}
 						value={item.value}
-						onChange={e => onChangeCheckedkKindsOfCourse(e, item)}
+						onChange={e => onChangeCheckedkKindOfCourse(e, item)}
 					/>
 				))}
-			</StyledFiltersKindsOfCourse>
+			</StyledFiltersKindOfCourse>
 			<Range
 				label={'Até quanto pode pagar?'}
 				min={0}
