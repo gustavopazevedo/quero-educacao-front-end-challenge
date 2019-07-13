@@ -7,6 +7,7 @@ import uuidv4 from 'uuid/v4';
 /** COMPONENTS */
 import Checkbox from '@components/Checkbox';
 import Label from '@components/Label';
+import Range from '@components/Range';
 import Select from '@components/Select';
 /** END COMPONENTS */
 
@@ -18,6 +19,7 @@ const StyledFilters = styled.div`
 
 const StyledFiltersKindsOfCourse = styled.div`
 	width: 100%;
+	margin-bottom: 31px;
 `;
 /** END STYLED */
 
@@ -28,6 +30,7 @@ function Filters({ scholarships }) {
 	const [courses, setCourses] = useState(0);
 	const [kindsOfCourse, setKindsOfCourse] = useState(0);
 	const [checkedKindsOfCourse, setCheckedKindsOfCourse] = useState([]);
+	const [selectedPrice, setSelectedPrice] = useState(10000);
 
 	useEffect(() => {
 		if (scholarships.isFulfilled) {
@@ -77,9 +80,17 @@ function Filters({ scholarships }) {
 			/>
 			<StyledFiltersKindsOfCourse>
 				<Label customCss={css` margin-bottom: 31px;`}>Como você quer estudar?</Label>
-				{kindsOfCourse && kindsOfCourse.map(item => <Checkbox key={uuidv4()} checked={checkedKindsOfCourse.includes(item.value)} label={item.text} value={item.value} onChange={e => onChangeCheckedkKindsOfCourse(e, item)} />)}
+				{kindsOfCourse && kindsOfCourse.map(item => (
+					<Checkbox
+						key={uuidv4()}
+						checked={checkedKindsOfCourse.includes(item.value)}
+						label={item.text}
+						value={item.value}
+						onChange={e => onChangeCheckedkKindsOfCourse(e, item)}
+					/>
+				))}
 			</StyledFiltersKindsOfCourse>
-
+			<Range min={0} max={10000} value={selectedPrice} onChange={e => setSelectedPrice(e.target.value)} />
 		</StyledFilters>
 	)
 }
