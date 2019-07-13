@@ -80,10 +80,10 @@ const StyledRangeValue = styled.span`
 `;
 /** END STYLED */
 
-function Range({ max, min, onChange, value }) {
+function Range({ label, max, min, onChange, value }) {
 	return (
 		<StyledRange>
-			<Label>Até quanto pode pagar?</Label>
+			<Label>{label}</Label>
 			<StyledRangeValue>R${value}</StyledRangeValue>
 			<StyledRangeInput type="range" min={min} max={max} value={value} onChange={e => onChange(e)} />
 		</StyledRange>

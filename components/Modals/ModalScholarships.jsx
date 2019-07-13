@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from '@emotion/styled';
 
@@ -7,6 +8,7 @@ import withModal from '@hocs/withModal';
 
 /** COMPONENTS */
 import Filters from '@components/Filters';
+import ScholarshipsResults from '@components/ScholarshipsResults';
 /** END COMPONENTS */
 
 /** STYLED */
@@ -27,11 +29,14 @@ const StyledModalSubtitle = styled.p`
 /** END STYLED */
 
 function ModalScholarships({ customCss, scholarships }) {
+	const [filters, setFilters] = useState([])
+
 	return (
 		<StyledModalScholarships customCss={customCss}>
 			<StyledModalTitle>Adicionar bolsa</StyledModalTitle>
 			<StyledModalSubtitle>Filtre e adicione as bolsas de seu interesse.</StyledModalSubtitle>
-			<Filters />
+			<Filters onChange={f => setFilters(f)} />
+			<ScholarshipsResults filters={filters} />
 		</StyledModalScholarships>
 	)
 }

@@ -23,14 +23,14 @@ const StyledFiltersKindsOfCourse = styled.div`
 `;
 /** END STYLED */
 
-function Filters({ scholarships }) {
-	const [selectedCity, setSelectedCity] = useState(0);
-	const [selectedCourse, setSelectedCourse] = useState(0);
+function Filters({ onChange, scholarships }) {
+	const [selectedCity, setSelectedCity] = useState('');
+	const [selectedCourse, setSelectedCourse] = useState('');
 	const [cities, setCities] = useState(0);
 	const [courses, setCourses] = useState(0);
-	const [kindsOfCourse, setKindsOfCourse] = useState(0);
+	const [kindsOfCourse, setKindsOfCourse] = useState();
 	const [checkedKindsOfCourse, setCheckedKindsOfCourse] = useState([]);
-	const [selectedPrice, setSelectedPrice] = useState(10000);
+	const [selectedMaxPrice, setSelectedMaxPrice] = useState(10000);
 
 	useEffect(() => {
 		if (scholarships.isFulfilled) {
@@ -51,8 +51,18 @@ function Filters({ scholarships }) {
 			kindsOfCourseArr.sort();
 
 			setKindsOfCourse(kindsOfCourseArr.map(item => ({ text: item, value: item })))
+			setCheckedKindsOfCourse(kindsOfCourseArr)
 		}
 	}, [scholarships])
+
+	useEffect(() => {
+		onChange({
+			city: selectedCity,
+			course: selectedCourse,
+			kindsOfCourse: checkedKindsOfCourse,
+			maxPrice: selectedMaxPrice
+		})
+	}, [selectedCity, selectedCourse, checkedKindsOfCourse, selectedMaxPrice])
 
 	function onChangeCheckedkKindsOfCourse(e, item) {
 		if (e.target.checked) {
@@ -70,6 +80,7 @@ function Filters({ scholarships }) {
 				onChange={value => setSelectedCity(value)}
 				options={cities}
 				value={selectedCity}
+				defaultOption={{ text: '', value: '' }}
 			/>
 			<Select
 				customCss={css` margin-bottom: 27px; `}
@@ -77,6 +88,7 @@ function Filters({ scholarships }) {
 				onChange={value => setSelectedCourse(value)}
 				options={courses}
 				value={selectedCourse}
+				defaultOption={{ text: '', value: '' }}
 			/>
 			<StyledFiltersKindsOfCourse>
 				<Label customCss={css` margin-bottom: 31px;`}>Como você quer estudar?</Label>
@@ -90,7 +102,13 @@ function Filters({ scholarships }) {
 					/>
 				))}
 			</StyledFiltersKindsOfCourse>
-			<Range min={0} max={10000} value={selectedPrice} onChange={e => setSelectedPrice(e.target.value)} />
+			<Range
+				label={'Até quanto pode pagar?'}
+				min={0}
+				max={10000}
+				value={selectedMaxPrice}
+				onChange={e => setSelectedMaxPrice(e.target.value)}
+			/>
 		</StyledFilters>
 	)
 }

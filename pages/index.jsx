@@ -39,16 +39,21 @@ const CssModalScholarships = css`
 
 function Home({ scholarships }) {
 	const [isModalOpened, setIsModalOpened] = useState(false);
+	const [selectedSemester, setSelectedSemester] = useState(0)
 	
 	return (
 		<DefaultLayout>
 			<Container>
 				<StyledTitle>Bolsas favoritas</StyledTitle>
 				<StyledParagraph>Adicione bolsas de cursos e faculdades do seu interesse e receba atualizações com as melhores ofertas disponíveis.</StyledParagraph>
-				<SemesterFilter />
+				<SemesterFilter onSelect={s => setSelectedSemester(s)} />
 				<Scholarships items={[]} onAdd={() => setIsModalOpened(true)} />
 			</Container>
-			<ModalScholarships customCss={CssModalScholarships} isOpened={isModalOpened} onClose={() => setIsModalOpened(false)} />
+			<ModalScholarships
+				customCss={CssModalScholarships}
+				isOpened={isModalOpened}
+				onClose={() => setIsModalOpened(false)}
+			/>
 		</DefaultLayout>
 	)
 }

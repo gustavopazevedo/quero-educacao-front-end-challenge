@@ -46,12 +46,13 @@ const StyledSelect = styled.div`
 `;
 /** END STYLED */
 
-function Select({ customCss, label, onChange, options, value }) {
+function Select({ customCss, defaultOption, label, onChange, options, value }) {
 	return (
 		<StyledSelectWrapper customCss={customCss}>
 			<Label>{label}</Label>
 			<StyledSelect>
 				<select onChange={(e) => onChange(e.target.value)} value={value}>
+					{defaultOption ? <option hidden value={defaultOption.value}>{defaultOption.text}</option> : null}
 					{options && options.map(option => <option key={uuidv4()} value={option.value}>{option.text}</option>)}
 				</select>
 			</StyledSelect>

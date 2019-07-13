@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import uuidv4 from 'uuid/v4';
@@ -38,8 +38,12 @@ const StyledSemesterFilterItem = styled.li`
 `;
 /** END STYLED */
 
-function SemesterFilter({ scholarships }) {
+function SemesterFilter({ scholarships, onSelect }) {
 	const [selectedSemester, setSelectecSemester] = useState(0)
+
+	useEffect(() => {
+		onSelect(selectedSemester)
+	}, [selectedSemester])
 
 	function getSemesters() {
 		if (scholarships.isFulfilled) {
