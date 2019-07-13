@@ -1,20 +1,15 @@
 import styled from '@emotion/styled';
 import uuidv4 from 'uuid/v4';
 
+/** COMPONENTS */
+import Label from '@components/Label';
+/** END COMPONENTS */
+
 /** STYLED */
 const StyledSelectWrapper = styled.div`
 	width: 100%;
 
 	${props => props.customCss}
-`;
-
-const StyledSelectLabel = styled.label`
-	width: 100%;
-	display: block;
-	font-size: 1.3rem;
-	font-weight: 700;
-	text-transform: uppercase;
-	margin-bottom: 3px;
 `;
 
 const StyledSelect = styled.div`
@@ -54,7 +49,7 @@ const StyledSelect = styled.div`
 function Select({ customCss, label, onChange, options, value }) {
 	return (
 		<StyledSelectWrapper customCss={customCss}>
-			<StyledSelectLabel>{label}</StyledSelectLabel>
+			<Label>{label}</Label>
 			<StyledSelect>
 				<select onChange={(e) => onChange(e.target.value)} value={value}>
 					{options && options.map(option => <option key={uuidv4()} value={option.value}>{option.text}</option>)}
