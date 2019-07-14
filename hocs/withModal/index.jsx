@@ -97,6 +97,7 @@ function withModal(WrappedComponent) {
 		useEffect(() => {
 			if (props.isOpened) {
 				setIsOpened(true)
+				window.scrollTo(0, 0);
 			}
 		}, [isRendered])
 

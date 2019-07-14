@@ -9,7 +9,6 @@ import withModal from '@hocs/withModal';
 /** COMPONENTS */
 import Filters from '@components/Filters';
 import ScholarshipsResults from '@components/ScholarshipsResults';
-import Button from '@components/Button';
 /** END COMPONENTS */
 
 /** STYLED */
@@ -27,13 +26,6 @@ const StyledModalScholarshipsTitle = styled.h2`
 const StyledModalScholarshipsSubtitle = styled.p`
 	font-size: 1.6rem;
 `;
-
-const StyledModalScholarshipsButtons = styled.div`
-	width: 100%;
-	padding-top: 24px;
-	display: flex;
-	justify-content: space-between;
-`;
 /** END STYLED */
 
 function ModalScholarships({ customCss, scholarships, onClose }) {
@@ -44,11 +36,11 @@ function ModalScholarships({ customCss, scholarships, onClose }) {
 			<StyledModalScholarshipsTitle>Adicionar bolsa</StyledModalScholarshipsTitle>
 			<StyledModalScholarshipsSubtitle>Filtre e adicione as bolsas de seu interesse.</StyledModalScholarshipsSubtitle>
 			<Filters onChange={f => setFilters(f)} />
-			<ScholarshipsResults filters={filters} onSelect={items => console.log(item)} />
-			<StyledModalScholarshipsButtons>
-				<Button appearance={'cancel'} onClick={() => onClose()}>Cancelar</Button>
-				<Button disabled={true}>Adicionar bolsa(s)</Button>
-			</StyledModalScholarshipsButtons>
+			<ScholarshipsResults
+				filters={filters}
+				onCloseModal={() => onClose()}
+				onSelect={items => console.log(items)}
+			/>
 		</StyledModalScholarships>
 	)
 }

@@ -36,6 +36,7 @@ const GlobalStyles = css`
 	html {
 		font-size: 10px;
 		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+		scroll-behavior: smooth;
 	}
 
 	body {

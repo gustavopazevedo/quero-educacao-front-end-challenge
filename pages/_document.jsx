@@ -1,5 +1,4 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-import uuidv4 from 'uuid/v4';
 
 class CustomDocument extends Document {
 	static async getInitialProps(ctx) {
@@ -13,12 +12,12 @@ class CustomDocument extends Document {
 		return (
 			<Html>
 				<Head>
-					{EXTERNAL_STYLESHEETS.map(stylesheet => (
-						<link key={uuidv4()} rel="stylesheet" href={stylesheet} />
+					{EXTERNAL_STYLESHEETS.map((stylesheet, index) => (
+						<link key={`stylesheet-${index}`} rel="stylesheet" href={stylesheet} />
 					))}
 
-					{EXTERNAL_FONTS.map(font => (
-						<link key={uuidv4()} rel="stylesheet" href={font} />
+					{EXTERNAL_FONTS.map((font, index) => (
+						<link key={`font-${index}`} rel="stylesheet" href={font} />
 					))}
 				</Head>
 				<body>

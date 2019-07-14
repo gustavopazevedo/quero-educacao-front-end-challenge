@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import uuidv4 from 'uuid/v4';
 
 /** COMPONENTS */
 import Label from '@components/Label';
@@ -53,7 +52,7 @@ function Select({ customCss, defaultOption, label, onChange, options, value }) {
 			<StyledSelect>
 				<select onChange={(e) => onChange(e.target.value)} value={value}>
 					{defaultOption ? <option hidden value={defaultOption.value}>{defaultOption.text}</option> : null}
-					{options && options.map(option => <option key={uuidv4()} value={option.value}>{option.text}</option>)}
+					{options && options.map((option, index) => <option key={`option-${index}`} value={option.value}>{option.text}</option>)}
 				</select>
 			</StyledSelect>
 		</StyledSelectWrapper>

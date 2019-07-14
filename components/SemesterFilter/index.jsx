@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
-import uuidv4 from 'uuid/v4';
 
 /** STYLED */
 const StyledSemesterFilter = styled.ul`
@@ -70,9 +69,9 @@ function SemesterFilter({ scholarships, onSelect }) {
 
 	return (
 		<StyledSemesterFilter>
-			{getSemesters().map(item => (
+			{getSemesters().map((item, index) => (
 				<StyledSemesterFilterItem
-					key={uuidv4()}
+					key={`semester-filter-${index}`}
 					selected={selectedSemester === item.enrollment_semester}
 					onClick={() => setSelectecSemester(item.enrollment_semester)}
 				>

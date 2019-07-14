@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
-import uuidv4 from 'uuid/v4';
 
 /** COMPONENTS */
 import Checkbox from '@components/Checkbox';
@@ -64,14 +63,6 @@ function Filters({ onChange, scholarships }) {
 		})
 	}, [selectedCity, selectedCourse, checkedKindOfCourse, selectedMaxPrice])
 
-	function onChangeCheckedkKindOfCourse(e, item) {
-		if (e.target.checked) {
-			setCheckedKindOfCourse(c => [...c, item.value])
-		} else {
-			setCheckedKindOfCourse(c => c.filter(filtered => filtered !== item.value))
-		}
-	}
-
 	return (
 		<StyledFilters>
 			<Select
@@ -92,13 +83,16 @@ function Filters({ onChange, scholarships }) {
 			/>
 			<StyledFiltersKindOfCourse>
 				<Label customCss={css` margin-bottom: 31px;`}>Como você quer estudar?</Label>
-				{kindOfCourse && kindOfCourse.map(item => (
+				{kindOfCourse && kindOfCourse.map((item, index) => (
 					<Checkbox
-						key={uuidv4()}
+						key={`checkbox-${index}`}
 						checked={checkedKindOfCourse.includes(item.value)}
 						label={item.text}
 						value={item.value}
-						onChange={e => onChangeCheckedkKindOfCourse(e, item)}
+						onChange={e => e.target.checked
+							? setCheckedKindOfCourse([...checkedKindOfCourse, e.target.value])
+							: setCheckedKindOfCourse(checkedKindOfCourse.filter(kindOfCourse => kindOfCourse !== e.target.value))
+						}
 					/>
 				))}
 			</StyledFiltersKindOfCourse>
