@@ -57,13 +57,21 @@ function Home({ favoriteScholarships }) {
 		}
 	}, [favoriteScholarships])
 
+	useEffect(() => {
+		localStorage.setItem('quero-educacao-scholarships', JSON.stringify(items))
+	}, [items])
+
 	return (
 		<DefaultLayout>
 			<Container>
 				<StyledTitle>Bolsas favoritas</StyledTitle>
 				<StyledParagraph>Adicione bolsas de cursos e faculdades do seu interesse e receba atualizações com as melhores ofertas disponíveis.</StyledParagraph>
 				<SemesterFilter onSelect={s => setSelectedSemester(s)} />
-				<Scholarships items={items} onAdd={() => setIsModalOpened(true)} />
+				<Scholarships
+					items={items}
+					onAdd={() => setIsModalOpened(true)}
+					onExclude={(index) => setItems(items.filter((item, i) => i !== index))}
+				/>
 			</Container>
 			<ModalScholarships
 				customCss={CssModalScholarships}

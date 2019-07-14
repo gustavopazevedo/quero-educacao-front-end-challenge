@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 /** STYLED */
 const StyledButton = styled.button`
 	width: auto;
+	min-width: 162px;
 	height: 48px;
 	font-size: 1.6rem;
 	font-weight: 700;
@@ -15,7 +16,8 @@ const StyledButton = styled.button`
 	cursor: pointer;
 	user-select: none;
 
-	${props => props.appearance && css`
+	${props => props.appearance === 'cancel' && css`
+		min-width: 114px;
 		background-color: transparent;
 		border-color: var(--color-secondary-blue);
 		color: var(--color-secondary-blue);
