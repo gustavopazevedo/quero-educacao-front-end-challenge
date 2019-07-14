@@ -12,11 +12,13 @@ const StyledCheckbox = styled.span`
 `;
 
 const StyledCheckboxLabel = styled.label`
+	min-height: 16px;
 	line-height: 1.6rem;
 	font-size: 1.6rem;
 	position: relative;
-	padding-left: 25px;
+	padding-left: 16px;
 	display: block;
+	text-indent: 9px;
 
 	&:before {
 		width: 16px;
@@ -53,7 +55,7 @@ function Checkbox({ checked, label, value, onChange }) {
 		<StyledCheckbox>
 			<StyledCheckboxLabel checked={checked}>
 				<StyledCheckboxInput type="checkbox" value={value} checked={checked} onChange={(e) => onChange(e)} />
-				{label}
+				{label ? label : null}
 			</StyledCheckboxLabel>
 		</StyledCheckbox>
 	)
