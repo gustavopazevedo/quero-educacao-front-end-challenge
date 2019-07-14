@@ -8,12 +8,12 @@ const PosedWithModalOverlay = posed.div({
 	opened: {
 		applyAtStart: { display: 'block' },
 		opacity: 0.88,
-		transition: { duration: 500 }
+		transition: { duration: 250 }
 	},
 	closed: {
 		applyAtEnd: { display: 'none' },
 		opacity: 0,
-		transition: { duration: 500 }
+		transition: { duration: 250 }
 	}
 });
 
@@ -23,14 +23,14 @@ const PosedWithModalComponent = posed.div({
 		opacity: 1,
 		x: '-50%',
 		y: 60,
-		transition: { duration: 500 },
+		transition: { duration: 250 },
 	},
 	closed: {
 		applyAtEnd: { display: 'none' },
 		opacity: 0,
 		x: '-50%',
 		y: 200,
-		transition: { duration: 500 }
+		transition: { duration: 250 }
 	}
 });
 /** END POSED */
