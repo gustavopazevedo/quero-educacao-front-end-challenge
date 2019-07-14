@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { connect } from 'react-redux';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 
@@ -37,7 +36,7 @@ const CssModalScholarships = css`
 `;
 /** END STYLED */
 
-function Home({ scholarships }) {
+function Home({ favoriteScholarships }) {
 	const [isModalOpened, setIsModalOpened] = useState(false);
 	const [selectedSemester, setSelectedSemester] = useState(0)
 	
@@ -47,7 +46,7 @@ function Home({ scholarships }) {
 				<StyledTitle>Bolsas favoritas</StyledTitle>
 				<StyledParagraph>Adicione bolsas de cursos e faculdades do seu interesse e receba atualizações com as melhores ofertas disponíveis.</StyledParagraph>
 				<SemesterFilter onSelect={s => setSelectedSemester(s)} />
-				<Scholarships items={[]} onAdd={() => setIsModalOpened(true)} />
+				<Scholarships onAdd={() => setIsModalOpened(true)} />
 			</Container>
 			<ModalScholarships
 				customCss={CssModalScholarships}
@@ -66,9 +65,4 @@ Home.getInitialProps = async ({ store }) => {
 	}
 }
 
-export default connect(
-	store => ({
-		scholarships: store.scholarships
-	}),
-	actions
-)(Home);
+export default Home;

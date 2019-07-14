@@ -28,7 +28,7 @@ const StyledModalScholarshipsSubtitle = styled.p`
 `;
 /** END STYLED */
 
-function ModalScholarships({ customCss, scholarships, onClose }) {
+function ModalScholarships({ customCss, onClose }) {
 	const [filters, setFilters] = useState([])
 
 	return (
@@ -39,14 +39,9 @@ function ModalScholarships({ customCss, scholarships, onClose }) {
 			<ScholarshipsResults
 				filters={filters}
 				onCloseModal={() => onClose()}
-				onSelect={items => console.log(items)}
 			/>
 		</StyledModalScholarships>
 	)
 }
 
-export default connect(
-	store => ({
-		scholarships: store.scholarships
-	})
-)(withModal(ModalScholarships));
+export default withModal(ModalScholarships)

@@ -1,8 +1,5 @@
+import { connect } from 'react-redux';
 import styled from '@emotion/styled';
-
-/** COMPONENTS */
-import SingleScholarship from '@components/SingleScholarship';
-/** END COMPONENTS */
 
 /** STYLED */
 const StyledScholarships = styled.div`
@@ -12,7 +9,7 @@ const StyledScholarships = styled.div`
 	margin-top: 32px;
 `;
 
-const StyledAddScholarship = styled.div`
+const StyledScholarshipsAdd = styled.div`
 	width: 100%;
 	height: 199px;
 	background-color: #fff;
@@ -46,7 +43,7 @@ const StyledAddScholarship = styled.div`
 	}
 `;
 
-const StyledAddScholarshipIcon = styled.span`
+const StyledScholarshipsAddIcon = styled.span`
 	width: 64px;
 	height: 64px;
 	position: relative;
@@ -56,28 +53,36 @@ const StyledAddScholarshipIcon = styled.span`
 	margin-bottom: 19px;
 `;
 
-const StyledSelectedScholarships = styled.div`
+const StyledScholarshipsItem = styled.div`
 	width: 100%;
+	height: auto;
+	padding: 20px 16px 16px 16px;
+	background-color: #fff;
+	box-shadow: 0px 2px 5px 0px rgba(210, 210, 210, 1);
+	position: relative;
 	margin-top: 24px;
 `;
 /** END STYLED */
 
-function Scholarships({ items, onAdd }) {
+function Scholarships({ favoriteScholarships, onAdd }) {
 	return (
 		<StyledScholarships>
-			<StyledAddScholarship onClick={() => onAdd()}>
-				<StyledAddScholarshipIcon />
+			<StyledScholarshipsAdd onClick={() => onAdd()}>
+				<StyledScholarshipsAddIcon />
 				<h3>Adicionar bolsa</h3>
 				<p>Clique para adicionar bolsas <br />de cursos do seu interesse</p>
-			</StyledAddScholarship>
-			{items ? (
-				<StyledSelectedScholarships>
-					<SingleScholarship />
-				</StyledSelectedScholarships>
-			) : null }
-
+			</StyledScholarshipsAdd>
+			{favoriteScholarships.isFulfilled && favoriteScholarships.data.map(item => (
+				<StyledScholarshipsItem>
+					<p>{item.discount_percentage}</p>
+				</StyledScholarshipsItem>
+			))}
 		</StyledScholarships>
 	)
 }
 
-export default Scholarships;
+export default connect(
+	store => ({
+		favoriteScholarships: store.favoriteScholarships
+	})
+)(Scholarships);

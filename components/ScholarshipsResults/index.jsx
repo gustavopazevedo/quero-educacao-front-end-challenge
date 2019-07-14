@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import styled from '@emotion/styled';
 
+/** ACTIONS */
+import actions from '@actions';
+/** END ACTIONS */
+
 /** COMPONENTS */
 import Checkbox from '@components/Checkbox';
 import Button from '@components/Button';
@@ -80,7 +84,7 @@ const StyledScholarshipsResultsButtons = styled.div`
 `;
 /** END STYLED  */
 
-function ScholarshipsResults({ filters, scholarships, onCloseModal }) {
+function ScholarshipsResults({ filters, scholarships, setFavoriteScholarships, onCloseModal }) {
 	const [results, setResults] = useState([])
 	const [checkedItems, setCheckedItems] = useState([]);
 
@@ -105,6 +109,29 @@ function ScholarshipsResults({ filters, scholarships, onCloseModal }) {
 	useEffect(() => {
 		setCheckedItems([])
 	}, [results])
+
+	function addFavoriteScholarships() {
+		const favoriteScholarships = checkedItems.map(item => {
+			const splittedItem = item.split('|');
+
+			return results.filter(result => {
+				const { course, university, campus } = result;
+
+				return (
+					course.name === splittedItem[0]
+					&& course.kind === splittedItem[1]
+					&& course.level === splittedItem[2]
+					&& course.shift === splittedItem[3]
+					&& university.name === splittedItem[4]
+					&& campus.name === splittedItem[5]
+					&& campus.city === splittedItem[6]
+				)
+			})[0]
+		});
+
+		setFavoriteScholarships(favoriteScholarships);
+		onCloseModal();
+	}
 
 	function getCheckboxValue(item) {
 		return `${item.course.name}|${item.course.kind}|${item.course.level}|${item.course.shift}|${item.university.name}|${item.campus.name}|${item.campus.city}`;
@@ -140,7 +167,7 @@ function ScholarshipsResults({ filters, scholarships, onCloseModal }) {
 
 			<StyledScholarshipsResultsButtons>
 				<Button appearance={'cancel'} onClick={() => onCloseModal()}>Cancelar</Button>
-				<Button disabled={checkedItems.length > 0 ? false : true}>Adicionar bolsa(s)</Button>
+				<Button disabled={checkedItems.length > 0 ? false : true} onClick={(e) => addFavoriteScholarships()}>Adicionar bolsa(s)</Button>
 			</StyledScholarshipsResultsButtons>
 		</StyledScholarshipsResults>
 	)
@@ -149,5 +176,6 @@ function ScholarshipsResults({ filters, scholarships, onCloseModal }) {
 export default connect(
 	store => ({
 		scholarships: store.scholarships
-	})
+	}),
+	actions
 )(ScholarshipsResults);
