@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 
@@ -38,15 +39,31 @@ const CssModalScholarships = css`
 
 function Home({ favoriteScholarships }) {
 	const [isModalOpened, setIsModalOpened] = useState(false);
+	const [items, setItems] = useState([])
 	const [selectedSemester, setSelectedSemester] = useState(0)
-	
+
+	useEffect(() => {
+		const storage = JSON.parse(localStorage.getItem('quero-educacao-scholarships'))
+		
+		if (storage && storage.length) {
+			setItems(storage)
+		}
+	}, [])
+
+	useEffect(() => {
+		if (favoriteScholarships.isFulfilled) {
+			setItems(favoriteScholarships.data);
+			localStorage.setItem('quero-educacao-scholarships', JSON.stringify(favoriteScholarships.data))
+		}
+	}, [favoriteScholarships])
+
 	return (
 		<DefaultLayout>
 			<Container>
 				<StyledTitle>Bolsas favoritas</StyledTitle>
 				<StyledParagraph>Adicione bolsas de cursos e faculdades do seu interesse e receba atualizações com as melhores ofertas disponíveis.</StyledParagraph>
 				<SemesterFilter onSelect={s => setSelectedSemester(s)} />
-				<Scholarships onAdd={() => setIsModalOpened(true)} />
+				<Scholarships items={items} onAdd={() => setIsModalOpened(true)} />
 			</Container>
 			<ModalScholarships
 				customCss={CssModalScholarships}
@@ -65,4 +82,8 @@ Home.getInitialProps = async ({ store }) => {
 	}
 }
 
-export default Home;
+export default connect(
+	store => ({
+		favoriteScholarships: store.favoriteScholarships
+	})
+)(Home);

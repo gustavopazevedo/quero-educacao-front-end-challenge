@@ -64,7 +64,7 @@ const StyledScholarshipsItem = styled.div`
 `;
 /** END STYLED */
 
-function Scholarships({ favoriteScholarships, onAdd }) {
+function Scholarships({ items, onAdd }) {
 	return (
 		<StyledScholarships>
 			<StyledScholarshipsAdd onClick={() => onAdd()}>
@@ -72,8 +72,8 @@ function Scholarships({ favoriteScholarships, onAdd }) {
 				<h3>Adicionar bolsa</h3>
 				<p>Clique para adicionar bolsas <br />de cursos do seu interesse</p>
 			</StyledScholarshipsAdd>
-			{favoriteScholarships.isFulfilled && favoriteScholarships.data.map(item => (
-				<StyledScholarshipsItem>
+			{items && items.map((item, index) => (
+				<StyledScholarshipsItem key={`scholarships-item-${index}`}>
 					<p>{item.discount_percentage}</p>
 				</StyledScholarshipsItem>
 			))}
@@ -81,8 +81,4 @@ function Scholarships({ favoriteScholarships, onAdd }) {
 	)
 }
 
-export default connect(
-	store => ({
-		favoriteScholarships: store.favoriteScholarships
-	})
-)(Scholarships);
+export default Scholarships;
