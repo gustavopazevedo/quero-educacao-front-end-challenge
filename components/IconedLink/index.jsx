@@ -38,33 +38,35 @@ const StyledIconedLink = styled.a`
 		}
 	`}
 
-	${props => props.iconPosition === 'left' && css`
-		width: auto;
-		height: 24px;
-		padding-top: unset;
-		padding-bottom: unset;
-		padding-left: 32px;
-		font-size: 1.6rem;
+	@media screen and (min-width: 1140px) {
+		${props => props.iconPosition === 'left' && css`
+			width: auto;
+			height: 24px;
+			padding-top: unset;
+			padding-bottom: unset;
+			padding-left: 32px;
+			font-size: 1.6rem;
 
-		&:before {
-			top: 0;
-			left: 0;
-		}
-	`}
+			&:before {
+				top: 0;
+				left: 0;
+			}
+		`}
 
-	${props => props.iconPosition === 'right' && css`
-		width: auto;
-		height: 24px;
-		padding-top: unset;
-		padding-bottom: unset;
-		padding-right: 32px;
-		font-size: 1.6rem;
+		${props => props.iconPosition === 'right' && css`
+			width: auto;
+			height: 24px;
+			padding-top: unset;
+			padding-bottom: unset;
+			padding-right: 32px;
+			font-size: 1.6rem;
 
-		&:before {
-			top: 0;
-			right: 0;
-		}
-	`}
+			&:before {
+				top: 0;
+				right: 0;
+			}
+		`}
+	}
 `;
 /** END STYLED */
 

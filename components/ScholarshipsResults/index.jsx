@@ -197,8 +197,7 @@ function ScholarshipsResults({ filters, scholarships, setFavoriteScholarships, o
 					<OrderBy
 						label={'Ordenar por'}
 						options={[
-							{ text: 'Nome da faculdade', value: 'university_name' },
-							{ text: 'Nome do curso', value: 'course_name' }
+							{ text: 'Nome da faculdade', value: 'university_name' }
 						]}
 						value={orderBy}
 						onChange={o => setOrderBy(o)}

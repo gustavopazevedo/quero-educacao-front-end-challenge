@@ -93,7 +93,7 @@ const StyledScholarshipsItem = styled.div`
 		flex-wrap: wrap;
 		align-content: space-between;
 
-		&:nth-child(4n) {
+		&:nth-of-type(4n) {
 			margin-right: 0;
 		}
 	}
