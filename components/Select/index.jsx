@@ -41,6 +41,13 @@ const StyledSelect = styled.div`
 		background-color: #fff;
 		border: none;
 		border-radius: 5px;
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		appearance: none;
+
+		&::-ms-expand {
+			display: none;
+		}
 	}
 `;
 /** END STYLED */

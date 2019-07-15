@@ -38,7 +38,7 @@ const StyledSemesterFilterItem = styled.li`
 /** END STYLED */
 
 function SemesterFilter({ scholarships, onSelect }) {
-	const [selectedSemester, setSelectecSemester] = useState(0)
+	const [selectedSemester, setSelectecSemester] = useState("")
 
 	useEffect(() => {
 		onSelect(selectedSemester)
@@ -60,7 +60,7 @@ function SemesterFilter({ scholarships, onSelect }) {
 			})
 	
 			return [
-				{ text: 'Todos os semestres', enrollment_semester: 0 },
+				{ text: 'Todos os semestres', enrollment_semester: "" },
 				...semesters
 			]
 		}

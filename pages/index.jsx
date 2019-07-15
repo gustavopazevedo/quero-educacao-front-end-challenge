@@ -40,10 +40,10 @@ const CssModalScholarships = css`
 function Home({ favoriteScholarships }) {
 	const [isModalOpened, setIsModalOpened] = useState(false);
 	const [items, setItems] = useState([])
-	const [selectedSemester, setSelectedSemester] = useState(0)
+	const [selectedSemester, setSelectedSemester] = useState("")
 
 	useEffect(() => {
-		const storage = JSON.parse(localStorage.getItem('quero-educacao-scholarships'))
+		const storage = getFromLocalStorage();
 		
 		if (storage && storage.length) {
 			setItems(storage)
@@ -53,24 +53,54 @@ function Home({ favoriteScholarships }) {
 	useEffect(() => {
 		if (favoriteScholarships.isFulfilled) {
 			setItems(favoriteScholarships.data);
-			localStorage.setItem('quero-educacao-scholarships', JSON.stringify(favoriteScholarships.data))
+			saveToLocalStorage(favoriteScholarships.data)
 		}
 	}, [favoriteScholarships])
 
-	useEffect(() => {
+	function getFromLocalStorage() {
+		return JSON.parse(localStorage.getItem('quero-educacao-scholarships'));
+	}
+
+	function onExcludeScholarship(indexToRemove) {
+		const itemsAfterRemove = items.filter((item, index) => index !== indexToRemove);
+
+		saveToLocalStorage(itemsAfterRemove);
+		setItems(itemsAfterRemove)
+	}
+
+	function onSelectSemester(semester) {
+		setSelectedSemester(semester);
+
+		const itemsFromStorage = getFromLocalStorage();
+
+		if (itemsFromStorage && itemsFromStorage.length) {
+
+			const filteredBySemester = itemsFromStorage.filter(item => {
+				if (semester === "") {
+					return item
+				}
+	
+				return item.enrollment_semester === semester
+			});
+	
+			setItems(filteredBySemester);
+		}
+	}
+
+	function saveToLocalStorage(items) {
 		localStorage.setItem('quero-educacao-scholarships', JSON.stringify(items))
-	}, [items])
+	}
 
 	return (
 		<DefaultLayout>
 			<Container>
 				<StyledTitle>Bolsas favoritas</StyledTitle>
 				<StyledParagraph>Adicione bolsas de cursos e faculdades do seu interesse e receba atualizações com as melhores ofertas disponíveis.</StyledParagraph>
-				<SemesterFilter onSelect={s => setSelectedSemester(s)} />
+				<SemesterFilter onSelect={s => onSelectSemester(s)} />
 				<Scholarships
 					items={items}
 					onAdd={() => setIsModalOpened(true)}
-					onExclude={(index) => setItems(items.filter((item, i) => i !== index))}
+					onExclude={indexToRemove => onExcludeScholarship(indexToRemove)}
 				/>
 			</Container>
 			<ModalScholarships

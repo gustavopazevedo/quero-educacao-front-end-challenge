@@ -87,7 +87,7 @@ function Filters({ onChange, scholarships }) {
 					<Checkbox
 						key={`checkbox-${index}`}
 						checked={checkedKindOfCourse.includes(item.value)}
-						label={item.text}
+						label={item.text === 'EaD' ? 'A distância' : item.text}
 						value={item.value}
 						onChange={e => e.target.checked
 							? setCheckedKindOfCourse([...checkedKindOfCourse, e.target.value])

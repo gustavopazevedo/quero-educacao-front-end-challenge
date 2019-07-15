@@ -11,7 +11,9 @@ const StyledRange = styled.div`
 
 const StyledRangeInput = styled.input`
 	width: 100%;
-	-webkit-appearance: none;
+	-moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
 	outline: none;
 	padding-top: 15px;
 
@@ -19,7 +21,9 @@ const StyledRangeInput = styled.input`
 	&::-webkit-slider-runnable-track {
 		width: 100%;
 		height: 4px;
+		-moz-appearance: none;
 		-webkit-appearance: none;
+		appearance: none;
 		border-radius: 2px;
 		background-color: var(--color-main-blue);
 		margin: 12px 0;
@@ -31,7 +35,9 @@ const StyledRangeInput = styled.input`
 		border-radius: 14px;
 		border: 2px solid var(--color-main-blue);
 		background-color: #fff;
+		-moz-appearance: none;
 		-webkit-appearance: none;
+		appearance: none;
 		margin-top: -12px;
 	}
 

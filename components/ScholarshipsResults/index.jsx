@@ -9,6 +9,7 @@ import actions from '@actions';
 /** COMPONENTS */
 import Checkbox from '@components/Checkbox';
 import Button from '@components/Button';
+import OrderBy from '@components/OrderBy';
 /** END COMPONENTS */
 
 /** STYLED */
@@ -23,6 +24,7 @@ const StyledScholarshipsResultsHeader = styled.div`
 	display: flex;
 	justify-content: space-between;
 	border-bottom: 2px solid #eeeeee;
+	padding-bottom: 24px;
 
 	span {
 		font-size: 1.6rem;
@@ -87,6 +89,7 @@ const StyledScholarshipsResultsButtons = styled.div`
 function ScholarshipsResults({ filters, scholarships, setFavoriteScholarships, onCloseModal }) {
 	const [results, setResults] = useState([])
 	const [checkedItems, setCheckedItems] = useState([]);
+	const [orderBy, setOrderBy] = useState('university_name');
 
 	useEffect(() => {
 		if (scholarships.isFulfilled) {
@@ -102,7 +105,7 @@ function ScholarshipsResults({ filters, scholarships, setFavoriteScholarships, o
 			_results = _results.filter(item => filters.kindOfCourse.includes(item.course.kind));
 			_results = _results.filter(item => item.price_with_discount <= filters.maxPrice);
 
-			setResults(_results)
+			setResults(orderResultsBy(_results));
 		}
 	}, [filters, scholarships])
 
@@ -137,40 +140,59 @@ function ScholarshipsResults({ filters, scholarships, setFavoriteScholarships, o
 		return `${item.course.name}|${item.course.kind}|${item.course.level}|${item.course.shift}|${item.university.name}|${item.campus.name}|${item.campus.city}`;
 	}
 
-	return (
-		<StyledScholarshipsResults>
-			<StyledScholarshipsResultsHeader>
-				<span>Resultado:</span>
-			</StyledScholarshipsResultsHeader>
+	function orderResultsBy(items) {
+		if (orderBy === 'university_name') {
+			return items.sort((a, b) => (a.university.name > b.university.name) ? 1 : -1);
+		}
+	}
 
-			{results && results.map((item, index) => (
-				<StyledScholarshipsResultsItem key={`scholarships-results-item${index}`}>
-					<Checkbox
-						checked={checkedItems.includes(getCheckboxValue(item))}
-						value={getCheckboxValue(item)}
-						onChange={e => e.target.checked
-							? setCheckedItems([...checkedItems, e.target.value])
-							: setCheckedItems(checkedItems.filter(checkeditem => checkeditem !== e.target.value))
-						}
+	if (results && results.length) {
+		return (
+			<StyledScholarshipsResults>
+				<StyledScholarshipsResultsHeader>
+					<span>Resultado:</span>
+					<OrderBy
+						label={'Ordenar por'}
+						options={[
+							{ text: 'Nome da faculdade', value: 'university_name' },
+							{ text: 'Nome do curso', value: 'course_name' }
+						]}
+						value={orderBy}
+						onChange={o => setOrderBy(o)}
 					/>
-					<StyledScholarshipsResultsItemImage src={item.university.logo_url} />
-					<StyledScholarshipsResultsItemInfo>
-						<StyledScholarshipsResultsItemCourse>{item.course.name}</StyledScholarshipsResultsItemCourse>
-						<StyledScholarshipsResultsItemLevel>{item.course.level}</StyledScholarshipsResultsItemLevel>
-						<StyledScholarshipsResultsItemPrice>
-							Bolsa de <strong>{Math.round(item.discount_percentage)}%<br />
-							R$ {Math.round(item.price_with_discount)}/mês</strong>
-						</StyledScholarshipsResultsItemPrice>
-					</StyledScholarshipsResultsItemInfo>
-				</StyledScholarshipsResultsItem>
-			))}
+				</StyledScholarshipsResultsHeader>
+	
+				{results.map((item, index) => (
+					<StyledScholarshipsResultsItem key={`scholarships-results-item${index}`}>
+						<Checkbox
+							checked={checkedItems.includes(getCheckboxValue(item))}
+							value={getCheckboxValue(item)}
+							onChange={e => e.target.checked
+								? setCheckedItems([...checkedItems, e.target.value])
+								: setCheckedItems(checkedItems.filter(checkeditem => checkeditem !== e.target.value))
+							}
+						/>
+						<StyledScholarshipsResultsItemImage src={item.university.logo_url} />
+						<StyledScholarshipsResultsItemInfo>
+							<StyledScholarshipsResultsItemCourse>{item.course.name}</StyledScholarshipsResultsItemCourse>
+							<StyledScholarshipsResultsItemLevel>{item.course.level}</StyledScholarshipsResultsItemLevel>
+							<StyledScholarshipsResultsItemPrice>
+								Bolsa de <strong>{Math.round(item.discount_percentage)}%<br />
+								R$ {Math.round(item.price_with_discount)}/mês</strong>
+							</StyledScholarshipsResultsItemPrice>
+						</StyledScholarshipsResultsItemInfo>
+					</StyledScholarshipsResultsItem>
+				))}
+	
+				<StyledScholarshipsResultsButtons>
+					<Button appearance={'cancel'} onClick={() => onCloseModal()}>Cancelar</Button>
+					<Button disabled={checkedItems.length > 0 ? false : true} onClick={(e) => addFavoriteScholarships()}>Adicionar bolsa(s)</Button>
+				</StyledScholarshipsResultsButtons>
+			</StyledScholarshipsResults>
+		)
+	}
 
-			<StyledScholarshipsResultsButtons>
-				<Button appearance={'cancel'} onClick={() => onCloseModal()}>Cancelar</Button>
-				<Button disabled={checkedItems.length > 0 ? false : true} onClick={(e) => addFavoriteScholarships()}>Adicionar bolsa(s)</Button>
-			</StyledScholarshipsResultsButtons>
-		</StyledScholarshipsResults>
-	)
+	return null;
 }
 
 export default connect(
