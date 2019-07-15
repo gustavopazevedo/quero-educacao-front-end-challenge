@@ -17,7 +17,8 @@ const StyledIconedLink = styled.a`
 	font-weight: 700;
 	font-size: 1.3rem;
 	color: var(--color-secondary-blue);
-	padding: 28px 0 1px 0;
+	padding-top: 28px;
+	padding-bottom: 1px;
 	user-select: none;
 
 	${props => props.border && css`
@@ -36,13 +37,41 @@ const StyledIconedLink = styled.a`
 			background-size: 24px auto;
 		}
 	`}
+
+	${props => props.iconPosition === 'left' && css`
+		width: auto;
+		height: 24px;
+		padding-top: unset;
+		padding-bottom: unset;
+		padding-left: 32px;
+		font-size: 1.6rem;
+
+		&:before {
+			top: 0;
+			left: 0;
+		}
+	`}
+
+	${props => props.iconPosition === 'right' && css`
+		width: auto;
+		height: 24px;
+		padding-top: unset;
+		padding-bottom: unset;
+		padding-right: 32px;
+		font-size: 1.6rem;
+
+		&:before {
+			top: 0;
+			right: 0;
+		}
+	`}
 `;
 /** END STYLED */
 
-function IconedLink({ border, icon, link, text }) {
+function IconedLink({ border, icon, iconPosition, link, text }) {
 	return (
 		<Link href={link}>
-			<StyledIconedLink border={border} icon={icon}>
+			<StyledIconedLink border={border} icon={icon} iconPosition={iconPosition}>
 				{text}
 			</StyledIconedLink>
 		</Link>

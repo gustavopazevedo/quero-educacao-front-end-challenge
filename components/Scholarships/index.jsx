@@ -11,10 +11,16 @@ const StyledScholarships = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	margin-top: 32px;
+
+	@media screen and (min-width: 1140px) {
+		align-content: center;
+		margin-top: 40px;
+	}
 `;
 
 const StyledScholarshipsAdd = styled.div`
 	width: 100%;
+	height: 199px;
 	background-color: #fff;
 	box-shadow: 0px 2px 5px 0px rgba(210, 210, 210, 1);
 	cursor: pointer;
@@ -23,7 +29,16 @@ const StyledScholarshipsAdd = styled.div`
 	justify-content: center;
 	align-content: center;
 	flex-wrap: wrap;
-	padding-bottom: 24px;
+
+	@media screen and (min-width: 1140px) {
+		width: calc(25% - 21px);
+		height: 447px;
+		margin-top: 0;
+		margin: 0 28px 28px 0;
+		padding: 24px;
+		display: flex;
+		flex-wrap: wrap;
+	}
 
 	img {
 		background-color: #f00;
@@ -56,7 +71,7 @@ const StyledScholarshipsAddIcon = styled.span`
 	background: url('static/images/icons/icon-plus-circle.svg') no-repeat scroll center center;
 	background-size: 64px auto;
 	display: block;
-	margin: 24px auto 19px auto;
+	margin: 0 auto 19px auto;
 `;
 
 const StyledScholarshipsItem = styled.div`
@@ -67,9 +82,25 @@ const StyledScholarshipsItem = styled.div`
 	box-shadow: 0px 2px 5px 0px rgba(210, 210, 210, 1);
 	position: relative;
 	margin-top: 24px;
+
+	@media screen and (min-width: 1140px) {
+		width: calc(25% - 21px);
+		height: 447px;
+		margin-top: 0;
+		margin: 0 28px 28px 0;
+		padding: 24px;
+		display: flex;
+		flex-wrap: wrap;
+		align-content: space-between;
+
+		&:nth-child(4n) {
+			margin-right: 0;
+		}
+	}
 `;
 
 const StyledScholarshipsItemUniversityInfo = styled.div`
+	width: 100%;
 	padding-bottom: 17px;
 	border-bottom: 2px solid #eeeeee;
 
@@ -79,6 +110,10 @@ const StyledScholarshipsItemUniversityInfo = styled.div`
 		object-fit: contain;
 		object-position: center;
 		display: block;
+
+		@media screen and (min-width: 1140px) {
+			height: 40px;
+		}
 	}
 
 	> h4 {
@@ -110,6 +145,7 @@ const StyledScholarshipsItemUniversityInfo = styled.div`
 `;
 
 const StyledScholarshipsItemCourseInfo = styled.div`
+	width: 100%;
 	padding: 20px 0 19px 0;
 	border-bottom: 2px solid #eeeeee;
 

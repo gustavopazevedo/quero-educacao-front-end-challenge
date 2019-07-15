@@ -39,10 +39,11 @@ const PosedWithModalComponent = posed.div({
 const StyledWithModal = styled.div`
 	width: 100%;
 	height: 100%;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	z-index: 999;
+	overflow-y: scroll;
 `;
 
 const StyledWithModalOverlay = styled(PosedWithModalOverlay)`
@@ -76,6 +77,14 @@ const StyledCloseButton = styled.button`
 	outline: none;
 	background: transparent url('/static/images/icons/icon-close.svg') no-repeat scroll center center;
 	background-size: 15px auto;
+	cursor: pointer;
+
+	@media screen and (min-width: 1140px) {
+		width: 25px;
+		height: 25px;
+		background-size: 25px auto;
+		right: 0;
+	}
 `;
 /** END STYLED */
 
@@ -100,6 +109,14 @@ function withModal(WrappedComponent) {
 				window.scrollTo(0, 0);
 			}
 		}, [isRendered])
+
+		useEffect(() => {
+			if (isOpened) {
+				document.querySelector('body').style.overflow = 'hidden';
+			} else {
+				document.querySelector('body').style.overflow = 'auto';
+			}
+		}, [isOpened])
 
 		if (isRendered) {
 			return (

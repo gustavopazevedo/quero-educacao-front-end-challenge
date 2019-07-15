@@ -7,6 +7,8 @@ import Label from '@components/Label';
 /** STYLED */
 const StyledRange = styled.div`
 	width: 100%;
+
+	${props => props.customCss}
 `;
 
 const StyledRangeInput = styled.input`
@@ -86,9 +88,9 @@ const StyledRangeValue = styled.span`
 `;
 /** END STYLED */
 
-function Range({ label, max, min, onChange, value }) {
+function Range({ customCss, label, max, min, onChange, value }) {
 	return (
-		<StyledRange>
+		<StyledRange customCss={customCss}>
 			<Label>{label}</Label>
 			<StyledRangeValue>R${value}</StyledRangeValue>
 			<StyledRangeInput type="range" min={min} max={max} value={value} onChange={e => onChange(e)} />

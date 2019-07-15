@@ -1,3 +1,4 @@
+import Media from 'react-media';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 
@@ -12,6 +13,10 @@ import Container from '@components/Container';
 /** STYLED */
 const CssBreadcrumbsContainer = css`
 	margin: 24px auto 25px auto;
+
+	@media screen and (min-width: 1140px) {
+		margin-bottom: 40px;
+	}
 `;
 
 const StyledBreadcrumbs = styled.nav`
@@ -20,11 +25,21 @@ const StyledBreadcrumbs = styled.nav`
 	ul {
 		width: 100%;
 		display: flex;
+		align-items: center;
 	}
 `;
 
 const StyledBreadcrumbsItem = styled.li`
 	list-style-type: none;
+	padding: 0 10px;
+
+	${props => props.separator && css`
+		padding: 0;
+	`}
+
+	&:first-child {
+		padding-left: 0;
+	}
 
 	a {
 		height: 20px;
@@ -56,6 +71,11 @@ const StyledBreadcrumbsItem = styled.li`
 			}
 		}
 	}
+
+	span {
+		display: block;
+		font-size: 1.3rem;
+	}
 `;
 
 /** END STYLED */
@@ -64,11 +84,43 @@ function Breadcrumbs() {
 	return (
 		<Container customCss={CssBreadcrumbsContainer}>
 			<StyledBreadcrumbs>
-				<StyledBreadcrumbsItem>
-					<Link href="/">
-						<a>Minha conta</a>
-					</Link>
-				</StyledBreadcrumbsItem>
+			<Media query={'(min-width: 1140px)'}>
+				{matches =>
+					matches
+						? (
+							<ul>
+								<StyledBreadcrumbsItem>
+									<Link href="/">
+										<a>Home</a>
+									</Link>
+								</StyledBreadcrumbsItem>
+								<StyledBreadcrumbsItem separator={true}>
+									<span>/</span>
+								</StyledBreadcrumbsItem>
+								<StyledBreadcrumbsItem>
+									<Link href="/">
+										<a>Minha conta</a>
+									</Link>
+								</StyledBreadcrumbsItem>
+								<StyledBreadcrumbsItem separator={true}>
+									<span>/</span>
+								</StyledBreadcrumbsItem>
+								<StyledBreadcrumbsItem>
+									<span>Bolsas favoritas</span>
+								</StyledBreadcrumbsItem>
+							</ul>
+						)
+						: (
+							<ul>
+								<StyledBreadcrumbsItem>
+									<Link href="/">
+										<a>Minha conta</a>
+									</Link>
+								</StyledBreadcrumbsItem>
+							</ul>
+						)
+				}
+			</Media>
 			</StyledBreadcrumbs>
 		</Container>
 	)

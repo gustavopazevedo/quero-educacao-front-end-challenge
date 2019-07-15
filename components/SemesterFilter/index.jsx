@@ -10,6 +10,12 @@ const StyledSemesterFilter = styled.ul`
 	border: 1px solid var(--color-secondary-blue);
 	border-radius: 5px;
 	margin-top: 32px;
+
+	@media screen and (min-width: 1140px) {
+		width: 585px;
+		display: flex;
+		margin-left: calc(100% - 585px);
+	}
 `;
 
 const StyledSemesterFilterItem = styled.li`
@@ -25,6 +31,17 @@ const StyledSemesterFilterItem = styled.li`
 	justify-content: center;
 	cursor: pointer;
 	user-select: none;
+
+	@media screen and (min-width: 1140px) {
+		width: 33.33%;
+		height: 32px;
+		border-bottom: none;
+		border-right: 1px solid var(--color-secondary-blue);
+
+		&:last-of-type {
+			border-right: none;
+		}
+	}
 
 	${props => props.selected && css`
 		background-color: var(--color-secondary-blue);

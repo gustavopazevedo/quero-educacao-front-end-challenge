@@ -15,12 +15,20 @@ import ScholarshipsResults from '@components/ScholarshipsResults';
 const StyledModalScholarships = styled.div`
 	background-color: #fff;
 	padding: 24px;
+
+	@media screen and (min-width: 1140px) {
+		padding: 30px;
+	}
 `;
 
 const StyledModalScholarshipsTitle = styled.h2`
 	font-size: 2.3rem;
 	font-weight: 700;
 	margin-bottom: 4px;
+
+	@media screen and (min-width: 1140px) {
+		padding: 2.8px;
+	}
 `;
 
 const StyledModalScholarshipsSubtitle = styled.p`

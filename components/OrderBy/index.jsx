@@ -3,6 +3,12 @@ import styled from '@emotion/styled';
 /** STYLED */
 const StyledOrderBy = styled.div`
 	width: auto;
+
+	@media screen and (min-width: 1140px) {
+		width: 50%;
+		display: flex;
+		align-items: center;
+	}
 `;
 
 const StyledOrderByTitle = styled.span`

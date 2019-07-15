@@ -14,11 +14,35 @@ import Select from '@components/Select';
 const StyledFilters = styled.div`
 	width: 100%;
 	margin-top: 31px;
+
+	@media screen and (min-width: 1140px) {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
 `;
 
 const StyledFiltersKindOfCourse = styled.div`
 	width: 100%;
 	margin-bottom: 31px;
+
+	@media screen and (min-width: 1140px) {
+		width: calc(50% - 6px);
+	}
+`;
+
+const CssStyledFiltersSelect = css`
+	margin-bottom: 27px;
+
+	@media screen and (min-width: 1140px) {
+		width: calc(50% - 6px);
+	}
+`;
+
+const CssStyledFiltersRange = css`
+	@media screen and (min-width: 1140px) {
+		width: calc(50% - 6px);
+	}
 `;
 /** END STYLED */
 
@@ -66,7 +90,7 @@ function Filters({ onChange, scholarships }) {
 	return (
 		<StyledFilters>
 			<Select
-				customCss={css` margin-bottom: 27px; `}
+				customCss={CssStyledFiltersSelect}
 				label={'Selecione sua cidade'}
 				onChange={value => setSelectedCity(value)}
 				options={cities}
@@ -74,7 +98,7 @@ function Filters({ onChange, scholarships }) {
 				defaultOption={{ text: '', value: '' }}
 			/>
 			<Select
-				customCss={css` margin-bottom: 27px; `}
+				customCss={CssStyledFiltersSelect}
 				label={'Selecione o curso de sua preferência'}
 				onChange={value => setSelectedCourse(value)}
 				options={courses}
@@ -97,6 +121,7 @@ function Filters({ onChange, scholarships }) {
 				))}
 			</StyledFiltersKindOfCourse>
 			<Range
+				customCss={CssStyledFiltersRange}
 				label={'Até quanto pode pagar?'}
 				min={0}
 				max={10000}

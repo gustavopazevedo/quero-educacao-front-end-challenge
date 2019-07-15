@@ -26,6 +26,10 @@ const StyledScholarshipsResultsHeader = styled.div`
 	border-bottom: 2px solid #eeeeee;
 	padding-bottom: 24px;
 
+	@media screen and (min-width: 1140px) {
+		align-items: center;
+	}
+
 	span {
 		font-size: 1.6rem;
 		font-weight: bold;
@@ -46,10 +50,21 @@ const StyledScholarshipsResultsItemImage = styled.img`
 	height: 60px;
 	padding: 0 28px;
 	object-fit: contain;
+
+	@media screen and (min-width: 1140px) {
+		width: 128px;
+	}
 `;
 
 const StyledScholarshipsResultsItemInfo = styled.div`
 	width: 50%;
+
+	@media screen and (min-width: 1140px) {
+		width: calc(100% - 144px);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
 `;
 
 const StyledScholarshipsResultsItemCourse = styled.h3`
@@ -58,12 +73,15 @@ const StyledScholarshipsResultsItemCourse = styled.h3`
 	line-height: 150%;
 	margin-bottom: 3px;
 	color: var(--color-secondary-blue);
-`;
 
-const StyledScholarshipsResultsItemLevel = styled.span`
-	width: 100%;
-	font-size: 1.3rem;
-	display: block;
+	span {
+		width: 100%;
+		font-size: 1.3rem;
+		display: block;
+		font-weight: 400;
+		color: var(--color-black);
+		margin-bottom: unset;
+	}
 `;
 
 const StyledScholarshipsResultsItemPrice = styled.span`
@@ -73,8 +91,18 @@ const StyledScholarshipsResultsItemPrice = styled.span`
 	display: block;
 	margin-top: 19px;
 
+	@media screen and (min-width: 1140px) {
+		margin-top: unset;
+		display: inline-table;
+		text-align: right;
+	}
+
 	strong {
 		color: var(--color-green);
+		
+		&:last-child {
+			display: block;
+		}
 	}
 `;
 
@@ -83,6 +111,14 @@ const StyledScholarshipsResultsButtons = styled.div`
 	padding-top: 24px;
 	display: flex;
 	justify-content: space-between;
+
+	@media screen and (min-width: 1140px) {
+		justify-content: flex-end;
+
+		button {
+			margin-left: 12px;
+		}
+	}
 `;
 /** END STYLED  */
 
@@ -90,6 +126,13 @@ function ScholarshipsResults({ filters, scholarships, setFavoriteScholarships, o
 	const [results, setResults] = useState([])
 	const [checkedItems, setCheckedItems] = useState([]);
 	const [orderBy, setOrderBy] = useState('university_name');
+	const [showResults, setShowResults] = useState(false)
+
+	useEffect(() => {
+		setTimeout(() => {
+			setShowResults(true)
+		}, 750)
+	}, [])
 
 	useEffect(() => {
 		if (scholarships.isFulfilled) {
@@ -146,7 +189,7 @@ function ScholarshipsResults({ filters, scholarships, setFavoriteScholarships, o
 		}
 	}
 
-	if (results && results.length) {
+	if (showResults && results && results.length) {
 		return (
 			<StyledScholarshipsResults>
 				<StyledScholarshipsResultsHeader>
@@ -161,7 +204,7 @@ function ScholarshipsResults({ filters, scholarships, setFavoriteScholarships, o
 						onChange={o => setOrderBy(o)}
 					/>
 				</StyledScholarshipsResultsHeader>
-	
+				
 				{results.map((item, index) => (
 					<StyledScholarshipsResultsItem key={`scholarships-results-item${index}`}>
 						<Checkbox
@@ -174,11 +217,13 @@ function ScholarshipsResults({ filters, scholarships, setFavoriteScholarships, o
 						/>
 						<StyledScholarshipsResultsItemImage src={item.university.logo_url} />
 						<StyledScholarshipsResultsItemInfo>
-							<StyledScholarshipsResultsItemCourse>{item.course.name}</StyledScholarshipsResultsItemCourse>
-							<StyledScholarshipsResultsItemLevel>{item.course.level}</StyledScholarshipsResultsItemLevel>
+							<StyledScholarshipsResultsItemCourse>
+								{item.course.name}
+								<span>{item.course.level}</span>
+							</StyledScholarshipsResultsItemCourse>
 							<StyledScholarshipsResultsItemPrice>
-								Bolsa de <strong>{Math.round(item.discount_percentage)}%<br />
-								R$ {Math.round(item.price_with_discount)}/mês</strong>
+								Bolsa de <strong>{Math.round(item.discount_percentage)}%</strong>
+								<strong>R$ {Math.round(item.price_with_discount)}/mês</strong>
 							</StyledScholarshipsResultsItemPrice>
 						</StyledScholarshipsResultsItemInfo>
 					</StyledScholarshipsResultsItem>

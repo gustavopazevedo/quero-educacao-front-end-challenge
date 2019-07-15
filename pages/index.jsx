@@ -23,6 +23,10 @@ const StyledTitle = styled.h2`
 	width: 100%;
 	font-size: 3.3rem;
 	margin-bottom: 10px;
+
+	@media screen and (min-width: 1140px) {
+		font-size: 4rem;
+	}
 `;
 
 const StyledParagraph = styled.p`
@@ -34,6 +38,11 @@ const StyledParagraph = styled.p`
 const CssModalScholarships = css`
 	width: 100%;
 	position: absolute;
+
+	@media screen and (min-width: 1140px) {
+		width: 750px;
+		margin-bottom: 60px;
+	}
 `;
 /** END STYLED */
 

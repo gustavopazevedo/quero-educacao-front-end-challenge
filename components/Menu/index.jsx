@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Media from 'react-media';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 
@@ -26,6 +27,10 @@ const CssMenuContainer = css`
 	position: relative;
 	justify-content: space-between;
 	align-items: center;
+	
+	@media screen and (min-width: 1140px) {
+		justify-content: flex-start;
+	}
 `;
 
 const StyledMyAccountLink = styled.a`
@@ -37,6 +42,11 @@ const StyledMyAccountLink = styled.a`
 	align-items: center;
 	margin-left: 16px;
 	cursor: pointer;
+
+	@media screen and (min-width: 1140px) {
+		font-size: 1.9rem;
+		margin-left: unset;
+	}
 `;
 
 const StyledMenuButton = styled.button`
@@ -84,9 +94,21 @@ const StyledMenuNav = styled.nav`
 	right: 0;
 	background-color: var(--color-main-blue);
 
-	${props => !props.isOpened && css`
-		display: none;
-	`}
+	@media screen and (min-width: 1140px) {
+		width: auto;
+		position: relative;
+		top: unset;
+		right: unset;
+		display: flex;
+		flex-wrap: wrap;
+		margin-left: 23px;
+	}
+
+	@media screen and (max-width: 1139px) {
+		${props => !props.isOpened && css`
+			display: none;
+		`}
+	}
 
 	ul {
 		width: 100%;
@@ -108,6 +130,11 @@ const StyledMenuNavItem = styled.li`
 		padding: 0 16px;
 		color: #fff;
 		font-size: 1.6rem;
+		
+		@media screen and (min-width: 1140px) {
+			padding: 0 25px;
+			font-weight: 700;
+		}
 
 		${props => props.current && css`
 			background-color: var(--color-secondary-blue);
@@ -126,7 +153,11 @@ function Menu() {
 				<Link href={process.env.HOME_URL}>
 					<StyledMyAccountLink>Minha conta</StyledMyAccountLink>
 				</Link>
-				<StyledMenuButton isOpened={isOpened} onClick={() => setIsOpened(!isOpened)}>Menu</StyledMenuButton>
+				<Media query={'(max-width: 1140px)'} render={() => {
+					return (
+						<StyledMenuButton isOpened={isOpened} onClick={() => setIsOpened(!isOpened)}>Menu</StyledMenuButton>
+					)
+				}} />
 				<StyledMenuNav isOpened={isOpened}>
 					<StyledMenuNavItem>
 						<Link href={process.env.HOME_URL}>
